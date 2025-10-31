@@ -23,7 +23,6 @@ public class Seperator {
         catch (NumberFormatException e){
             throw new IllegalArgumentException(SEPERATE_NOT_NUMBER.message());
         }
-        System.out.println(numbers);
         return numbers;
     }
 

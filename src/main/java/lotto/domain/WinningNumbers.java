@@ -34,4 +34,8 @@ public class WinningNumbers {
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE.message());
         }
     }
+
+    public List<Number> getWinningNumbers() {
+        return winningNumbers;
+    }
 }

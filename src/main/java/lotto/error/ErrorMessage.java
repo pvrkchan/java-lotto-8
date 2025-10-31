@@ -10,7 +10,9 @@ public enum ErrorMessage {
     END_WITH_SEPERATOR("[ERROR] 구분자가 잘못 입력되었습니다."),
     OUT_OF_NUMBER_RANGE("[ERROR] 당첨번호 입력은 %d부터 %d까지만 가능합니다."),
     OUT_OF_COUNT("[ERROR] 당첨번호는 %d개를 입력해야 합니다."),
-    WINNING_NUMBER_DUPLICATE("[ERROR] 당첨번호는 중복될 수 없습니다.");
+    WINNING_NUMBER_DUPLICATE("[ERROR] 당첨번호는 중복될 수 없습니다."),
+    BONUS_NOT_NUMBER("[ERROR] 보너스번호 입력은 숫자만 가능합니다."),
+    BONUS_NUMBER_DUPLICATE("[ERROR] 입력하신 보너스번호가 당첨번호와 중복되었습니다.");
 
     private final String message;
 

@@ -2,11 +2,13 @@ package lotto.ui;
 
 import lotto.util.ConsoleReader;
 
+import static lotto.error.ErrorMessage.BONUS_NOT_NUMBER;
 import static lotto.error.ErrorMessage.MONEY_AMOUNT_NOT_NUMBER;
 
 public class UserInterface {
     private static final String MONEY_AMOUNT_PROMPT = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS_PROMPT = "당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요.";
 
     public int readMoneyAmount() {
         System.out.println(MONEY_AMOUNT_PROMPT);
@@ -21,5 +23,15 @@ public class UserInterface {
         System.out.println();
         System.out.println(WINNING_NUMBERS_PROMPT);
         return ConsoleReader.readLine();
+    }
+
+    public int readBonusNumber() {
+        System.out.println();
+        System.out.println(BONUS_NUMBER_PROMPT);
+        try {
+            return Integer.parseInt(ConsoleReader.readLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(BONUS_NOT_NUMBER.message());
+        }
     }
 }
