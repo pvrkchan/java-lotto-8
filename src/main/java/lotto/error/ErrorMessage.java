@@ -1,8 +1,8 @@
 package lotto.error;
 
-import lotto.domain.Money;
-
 public enum ErrorMessage {
+    LOTTO_NUMBER_DUPLICATE("[ERROR] 로또 번호는 중복될 수 없습니다."),
+    LOTTO_NUMBER_SIZE("[ERROR] 로또 번호는 %d개여야 합니다."),
     MONEY_AMOUNT_NOT_NUMBER("[ERROR] 금액으로는 숫자만 입력 가능합니다."),
     MONEY_NOT_DIVIDED("[ERROR] 로또 구입 금액은 %d원 단위로 입력해야 합니다."),
     MONEY_MINIMUM("[ERROR] 로또 구입 금액은 %d원 이상 입력해야 합니다."),

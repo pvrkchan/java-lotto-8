@@ -1,9 +1,15 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static lotto.error.ErrorMessage.LOTTO_NUMBER_DUPLICATE;
+import static lotto.error.ErrorMessage.LOTTO_NUMBER_SIZE;
 
 public class Lotto {
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -12,8 +18,22 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
+        validateSize(numbers);
+        validateDuplicate(numbers);
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> numberSet = new HashSet<>(numbers);
+        if (numberSet.size() != numbers.size()) {
+            System.out.println(LOTTO_NUMBER_DUPLICATE);
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE.message());
+        }
+    }
+
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            System.out.println(LOTTO_NUMBER_SIZE.formatMessage(LOTTO_NUMBER_COUNT));
+            throw new IllegalArgumentException(LOTTO_NUMBER_SIZE.formatMessage(LOTTO_NUMBER_COUNT));
         }
     }
 

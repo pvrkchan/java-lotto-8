@@ -7,8 +7,6 @@ import lotto.ui.UserInterface;
 import lotto.util.Seperator;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoController {
     private UserInterface userInterface;
     private OutputView outputView;
@@ -21,11 +19,38 @@ public class LottoController {
     }
 
     public void run() {
-        Lottos lottos  = new Lottos(lottoService.buyLotto(userInterface.readMoneyAmount()));
+        Lottos lottos = makeLottos();
         outputView.printBuyingResult(lottos);
-        WinningNumbers winningNumbers = new WinningNumbers(Seperator.numberSplit(userInterface.readWinningNumbers()));
-        BonusNumber bonusNumber = new BonusNumber(new Number(userInterface.readBonusNumber()),winningNumbers);
+        WinningNumbers winningNumbers = makeWinningNumbers();
+        BonusNumber bonusNumber = makeBonusNumber(winningNumbers);
         Prizes prizes = new Prizes(lottoService.calculatePrize(lottos, winningNumbers, bonusNumber));
-        outputView.printPrizeResult(prizes);
+        outputView.printPrizeResult(prizes, Computer.computeProfit(lottos, prizes.getTotalPrizeMoney()));
+    }
+
+    private Lottos makeLottos() {
+        while (true) {
+            try {
+                return new Lottos(lottoService.buyLotto(userInterface.readMoneyAmount()));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+    }
+
+    private WinningNumbers makeWinningNumbers() {
+        while (true) {
+            try {
+                return new WinningNumbers(Seperator.numberSplit(userInterface.readWinningNumbers()));
+            } catch (IllegalArgumentException e) {
+            }
+        }
+    }
+
+    private BonusNumber makeBonusNumber(WinningNumbers winningNumbers) {
+        while (true) {
+            try {
+                return new BonusNumber(new Number(userInterface.readBonusNumber()), winningNumbers);
+            } catch (IllegalArgumentException e) {
+            }
+        }
     }
 }

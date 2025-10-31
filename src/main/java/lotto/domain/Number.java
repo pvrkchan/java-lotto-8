@@ -17,6 +17,7 @@ public class Number {
 
     private void validateRange(int number) {
         if (number < MIN_VALUE || number > MAX_VALUE) {
+            System.out.println(OUT_OF_NUMBER_RANGE.formatMessage(MIN_VALUE, MAX_VALUE));
             throw new IllegalArgumentException(OUT_OF_NUMBER_RANGE.formatMessage(MIN_VALUE, MAX_VALUE));
         }
     }

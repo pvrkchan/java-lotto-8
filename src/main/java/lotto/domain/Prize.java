@@ -1,21 +1,21 @@
 package lotto.domain;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public enum Prize {
-    THREE(BigInteger.valueOf(5_000)),
-    FOUR(BigInteger.valueOf(50_000)),
-    FIVE(BigInteger.valueOf(1_500_000)),
-    FIVE_BONUS(BigInteger.valueOf(30_000_000)),
-    SIX(BigInteger.valueOf(2_000_000_000));
+    THREE(BigDecimal.valueOf(5_000)),
+    FOUR(BigDecimal.valueOf(50_000)),
+    FIVE(BigDecimal.valueOf(1_500_000)),
+    FIVE_BONUS(BigDecimal.valueOf(30_000_000)),
+    SIX(BigDecimal.valueOf(2_000_000_000));
 
-    private final BigInteger prizeMoney;
+    private final BigDecimal prizeMoney;
 
-    Prize(BigInteger prizeMoney) {
+    Prize(BigDecimal prizeMoney) {
         this.prizeMoney = prizeMoney;
     }
 
-    public BigInteger getPrizeMoney() {
+    public BigDecimal getPrizeMoney() {
         return prizeMoney;
     }
 }

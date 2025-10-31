@@ -14,7 +14,8 @@ public class BonusNumber {
 
     private void validate(Number bonusNumber, WinningNumbers winningNumbers) {
         List<Integer> numbers = winningNumbers.getWinningNumbers();
-        if(numbers.contains(bonusNumber.getNumber())){
+        if (numbers.contains(bonusNumber.getNumber())) {
+            System.out.println(BONUS_NUMBER_DUPLICATE.message());
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE.message());
         }
     }

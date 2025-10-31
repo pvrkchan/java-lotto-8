@@ -15,7 +15,8 @@ public class Money {
     }
 
     private void validateBalance(int money) {
-        if(money < MINIMUM_BALANCE) {
+        if (money < MINIMUM_BALANCE) {
+            System.out.println(MONEY_MINIMUM.formatMessage(PRICE_PER_LOTTO));
             throw new IllegalArgumentException(MONEY_MINIMUM.formatMessage(PRICE_PER_LOTTO));
         }
     }
@@ -27,11 +28,12 @@ public class Money {
 
     private static void validateNotDivided(int money) {
         if (money % PRICE_PER_LOTTO != 0) {
+            System.out.println(MONEY_NOT_DIVIDED.formatMessage(PRICE_PER_LOTTO));
             throw new IllegalArgumentException(MONEY_NOT_DIVIDED.formatMessage(PRICE_PER_LOTTO));
         }
     }
 
-    public Money pay(){
+    public Money pay() {
         return new Money(balance - PRICE_PER_LOTTO);
     }
 

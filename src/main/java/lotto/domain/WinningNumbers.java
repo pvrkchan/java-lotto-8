@@ -23,7 +23,8 @@ public class WinningNumbers {
     }
 
     private void validateSize(List<Number> winningNumbers) {
-        if (winningNumbers.size() != MAXIMUM_COUNT){
+        if (winningNumbers.size() != MAXIMUM_COUNT) {
+            System.out.println(OUT_OF_COUNT.formatMessage(MAXIMUM_COUNT));
             throw new IllegalArgumentException(OUT_OF_COUNT.formatMessage(MAXIMUM_COUNT));
         }
     }
@@ -31,6 +32,7 @@ public class WinningNumbers {
     private void validateDuplicate(List<Number> winningNumbers) {
         Set<Number> numbers = new HashSet<>(winningNumbers);
         if (numbers.size() != winningNumbers.size()) {
+            System.out.println(WINNING_NUMBER_DUPLICATE.message());
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE.message());
         }
     }

@@ -11,7 +11,7 @@ import static lotto.error.ErrorMessage.SEPERATE_NOT_NUMBER;
 public class Seperator {
     private static final String SEPARATOR = ",";
 
-    public static List<Number> numberSplit(String inputString){
+    public static List<Number> numberSplit(String inputString) {
         validateEndWithSeperator(inputString);
         List<Number> numbers;
         try {
@@ -19,8 +19,8 @@ public class Seperator {
                     .map(Integer::parseInt)
                     .map(lotto.domain.Number::new)
                     .toList();
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
+            System.out.println(SEPERATE_NOT_NUMBER);
             throw new IllegalArgumentException(SEPERATE_NOT_NUMBER.message());
         }
         return numbers;
@@ -28,6 +28,7 @@ public class Seperator {
 
     private static void validateEndWithSeperator(String inputString) {
         if (inputString.endsWith(SEPARATOR)) {
+            System.out.println(END_WITH_SEPERATOR.message());
             throw new IllegalArgumentException(END_WITH_SEPERATOR.message());
         }
     }

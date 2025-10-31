@@ -10,6 +10,9 @@ public class RandomPicker {
     private static final int AMOUNT = 6;
 
     public static List<Integer> generateLottoNumbers() {
-        return Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, AMOUNT);
+        return Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, AMOUNT)
+                .stream()
+                .sorted()
+                .toList();
     }
 }

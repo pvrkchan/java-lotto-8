@@ -11,11 +11,14 @@ public class UserInterface {
     private static final String BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요.";
 
     public int readMoneyAmount() {
-        System.out.println(MONEY_AMOUNT_PROMPT);
-        try {
-            return Integer.parseInt(ConsoleReader.readLine());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(MONEY_AMOUNT_NOT_NUMBER.message());
+        while (true) {
+            System.out.println(MONEY_AMOUNT_PROMPT);
+            try {
+                return Integer.parseInt(ConsoleReader.readLine());
+            } catch (NumberFormatException e) {
+                System.out.println(MONEY_AMOUNT_NOT_NUMBER.message());
+                throw new IllegalArgumentException(MONEY_AMOUNT_NOT_NUMBER.message());
+            }
         }
     }
 
@@ -31,6 +34,7 @@ public class UserInterface {
         try {
             return Integer.parseInt(ConsoleReader.readLine());
         } catch (NumberFormatException e) {
+            System.out.println(BONUS_NOT_NUMBER.message());
             throw new IllegalArgumentException(BONUS_NOT_NUMBER.message());
         }
     }
