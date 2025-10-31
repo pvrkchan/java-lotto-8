@@ -18,5 +18,6 @@ public class LottoController {
 
     public void run() {
         Lottos lottos  = new Lottos(lottoService.buyLotto(userInterface.readMoneyAmount()));
+        outputView.printBuyingResult(lottos);
     }
 }

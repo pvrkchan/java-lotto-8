@@ -5,6 +5,7 @@ import lotto.domain.Money;
 import lotto.util.RandomPicker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoService {
@@ -13,6 +14,7 @@ public class LottoService {
         List<Lotto> lottos = new ArrayList<>();
         while (!balance.isRunOutOf()) {
             List<Integer> numbers = RandomPicker.generateLottoNumbers();
+            Collections.sort(numbers);
             lottos.add(new Lotto(numbers));
             balance = balance.pay();
         }
