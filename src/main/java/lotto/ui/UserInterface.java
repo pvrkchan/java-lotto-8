@@ -1,11 +1,10 @@
 package lotto.ui;
 
-import camp.nextstep.edu.missionutils.Console;
 import lotto.util.ConsoleReader;
 
 import static lotto.error.ErrorMessage.MONEY_AMOUNT_NOT_NUMBER;
 
-public class ConsoleUserInterface {
+public class UserInterface {
     private static final String MONEY_AMOUNT_PROMPT = "구입금액을 입력해 주세요.";
 
     public int readMoneyAmount() {

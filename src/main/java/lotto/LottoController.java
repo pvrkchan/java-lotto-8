@@ -1,21 +1,22 @@
 package lotto;
 
+import lotto.domain.Lottos;
 import lotto.service.LottoService;
-import lotto.ui.ConsoleUserInterface;
-import lotto.view.ConsoleOutputView;
+import lotto.ui.UserInterface;
+import lotto.view.OutputView;
 
 public class LottoController {
-    private ConsoleUserInterface consoleUserInterface;
-    private ConsoleOutputView consoleOutputView;
+    private UserInterface userInterface;
+    private OutputView outputView;
     private LottoService lottoService;
 
-    public LottoController(ConsoleUserInterface consoleUserInterface, ConsoleOutputView consoleOutputView, LottoService lottoService) {
-        this.consoleUserInterface = consoleUserInterface;
-        this.consoleOutputView = consoleOutputView;
+    public LottoController(UserInterface userInterface, OutputView outputView, LottoService lottoService) {
+        this.userInterface = userInterface;
+        this.outputView = outputView;
         this.lottoService = lottoService;
     }
 
     public void run() {
-        lottoService.buyLotto(consoleUserInterface.readMoneyAmount());
+        Lottos lottos  = new Lottos(lottoService.buyLotto(userInterface.readMoneyAmount()));
     }
 }

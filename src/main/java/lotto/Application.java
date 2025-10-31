@@ -1,16 +1,16 @@
 package lotto;
 
 import lotto.service.LottoService;
-import lotto.ui.ConsoleUserInterface;
-import lotto.view.ConsoleOutputView;
+import lotto.ui.UserInterface;
+import lotto.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        ConsoleUserInterface consoleUserInterface = new ConsoleUserInterface();
-        ConsoleOutputView consoleOutputView = new ConsoleOutputView();
+        UserInterface userInterface = new UserInterface();
+        OutputView outputView = new OutputView();
         LottoService lottoService = new LottoService();
 
-        LottoController lottoController = new LottoController(consoleUserInterface, consoleOutputView, lottoService);
+        LottoController lottoController = new LottoController(userInterface, outputView, lottoService);
         lottoController.run();
     }
 }
