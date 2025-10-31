@@ -6,6 +6,7 @@ import static lotto.error.ErrorMessage.MONEY_NOT_DIVIDED;
 public class Money {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final int MINIMUM_BALANCE = 0;
+
     private int balance;
 
     private Money(int money) {
