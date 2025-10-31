@@ -1,13 +1,13 @@
 package lotto;
 
-import lotto.domain.BonusNumber;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.domain.Number;
-import lotto.domain.WinningNumbers;
 import lotto.service.LottoService;
 import lotto.ui.UserInterface;
 import lotto.util.Seperator;
 import lotto.view.OutputView;
+
+import java.util.List;
 
 public class LottoController {
     private UserInterface userInterface;
@@ -25,5 +25,7 @@ public class LottoController {
         outputView.printBuyingResult(lottos);
         WinningNumbers winningNumbers = new WinningNumbers(Seperator.numberSplit(userInterface.readWinningNumbers()));
         BonusNumber bonusNumber = new BonusNumber(new Number(userInterface.readBonusNumber()),winningNumbers);
+        Prizes prizes = new Prizes(lottoService.calculatePrize(lottos, winningNumbers, bonusNumber));
+        outputView.printPrizeResult(prizes);
     }
 }

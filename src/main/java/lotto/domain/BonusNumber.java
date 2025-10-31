@@ -13,13 +13,13 @@ public class BonusNumber {
     }
 
     private void validate(Number bonusNumber, WinningNumbers winningNumbers) {
-        List<Number> numbers = winningNumbers.getWinningNumbers();
-        if(numbers.contains(bonusNumber)){
+        List<Integer> numbers = winningNumbers.getWinningNumbers();
+        if(numbers.contains(bonusNumber.getNumber())){
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE.message());
         }
     }
 
-    public Number getBonusNumber() {
-        return bonusNumber;
+    public int getBonusNumber() {
+        return bonusNumber.getNumber();
     }
 }

@@ -35,7 +35,9 @@ public class WinningNumbers {
         }
     }
 
-    public List<Number> getWinningNumbers() {
-        return winningNumbers;
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers.stream()
+                .map(Number::getNumber)
+                .toList();
     }
 }
