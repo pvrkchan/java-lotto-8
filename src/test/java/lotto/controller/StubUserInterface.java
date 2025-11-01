@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import lotto.domain.number.BonusNumber;
 import lotto.ui.UserInterface;
 
 public class StubUserInterface implements UserInterface {

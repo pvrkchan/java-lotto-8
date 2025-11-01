@@ -3,12 +3,10 @@ package lotto.controller;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.number.BonusNumber;
-import lotto.domain.number.Number;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.prize.Prize;
 import lotto.service.LottoService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +16,9 @@ public class StubLottoService implements LottoService {
     int receivedMoney = 0;
 
     boolean checkPrizeCalled = false;
-    List<Number> numberList = List.of(
-            new Number(40), new Number(41), new Number(42),
-            new Number(43), new Number(44), new Number(45)
-    );
-    Lottos receivedLottos = new Lottos(new ArrayList<>());
-    WinningNumbers receivedWinningNumbers = new WinningNumbers(numberList);
-
-    BonusNumber receivedBonusNumber = new BonusNumber(new Number(39), receivedWinningNumbers);
+    Lottos receivedLottos;
+    WinningNumbers receivedWinningNumbers;
+    BonusNumber receivedBonusNumber;
 
     private final List<Lotto> lottos;
     private final List<Prize> prizes;

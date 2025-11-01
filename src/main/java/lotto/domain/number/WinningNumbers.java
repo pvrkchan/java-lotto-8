@@ -4,8 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static lotto.error.ErrorMessage.OUT_OF_COUNT;
-import static lotto.error.ErrorMessage.WINNING_NUMBER_DUPLICATE;
+import static lotto.error.ErrorMessage.*;
 
 public class WinningNumbers {
     private static final int MAXIMUM_COUNT = 6;
@@ -18,8 +17,16 @@ public class WinningNumbers {
     }
 
     private void validate(List<Number> winningNumbers) {
+        validateNullOrEmpty(winningNumbers);
         validateSize(winningNumbers);
         validateDuplicate(winningNumbers);
+    }
+
+    private void validateNullOrEmpty(List<Number> winningNumbers) {
+        if (winningNumbers == null || winningNumbers.isEmpty()) {
+            System.out.println(EMPTY_WINNING_NUMBERS.message());
+            throw new IllegalArgumentException(EMPTY_WINNING_NUMBERS.message());
+        }
     }
 
     private void validateSize(List<Number> winningNumbers) {

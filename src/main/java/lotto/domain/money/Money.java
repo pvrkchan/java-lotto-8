@@ -40,4 +40,8 @@ public class Money {
     public boolean isRunOutOf() {
         return balance == MINIMUM_BALANCE;
     }
+
+    public int getBalance() {
+        return balance;
+    }
 }
