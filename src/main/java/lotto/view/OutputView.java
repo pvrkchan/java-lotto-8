@@ -1,12 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Prize;
-import lotto.domain.Prizes;
-
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.prize.Prize;
+import lotto.domain.prize.Prizes;
 import java.math.BigDecimal;
-import java.util.List;
 
 public class OutputView {
     private static final String BUYING_PROMPT = "%d개를 구매했습니다.";
@@ -27,7 +25,6 @@ public class OutputView {
     }
 
     public void printPrizeResult(Prizes prizes, BigDecimal profitPercent) {
-        List<Prize> prizeList = prizes.getPrizes();
         System.out.println();
         System.out.println(PRIZE_RESULT_PROMPT);
         System.out.printf(THREE_PRIZE + "%n", prizes.getFrequency(Prize.THREE));

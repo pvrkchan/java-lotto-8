@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.money;
 
 import static lotto.error.ErrorMessage.MONEY_MINIMUM;
 import static lotto.error.ErrorMessage.MONEY_NOT_DIVIDED;

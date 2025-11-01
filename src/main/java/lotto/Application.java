@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.LottoController;
 import lotto.service.LottoService;
 import lotto.ui.UserInterface;
 import lotto.view.OutputView;

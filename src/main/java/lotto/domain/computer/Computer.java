@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.computer;
+
+import lotto.domain.lotto.Lottos;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

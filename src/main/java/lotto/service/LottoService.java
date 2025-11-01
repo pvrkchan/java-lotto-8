@@ -1,6 +1,11 @@
 package lotto.service;
 
-import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.money.Money;
+import lotto.domain.number.BonusNumber;
+import lotto.domain.number.WinningNumbers;
+import lotto.domain.prize.Prize;
 import lotto.util.RandomPicker;
 
 import java.util.ArrayList;
@@ -19,31 +24,31 @@ public class LottoService {
         return lottos;
     }
 
-    public List<Prize> calculatePrize(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public List<Prize> checkPrize(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos.getLottos()) {
-            Optional<Prize> optionalPrize = calculateEachLotto(lotto, winningNumbers, bonusNumber);
+            Optional<Prize> optionalPrize = checkEachLotto(lotto, winningNumbers, bonusNumber);
             optionalPrize.ifPresent(prizes::add);
         }
         return prizes;
     }
 
-    public Optional<Prize> calculateEachLotto(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        Long count = lotto.getNumbers().stream()
+    public Optional<Prize> checkEachLotto(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        long matchCount = lotto.getNumbers().stream()
                 .filter(winningNumbers.getWinningNumbers()::contains)
                 .count();
-        if (count == 3)
+        if (matchCount == 3)
             return Optional.of(Prize.THREE);
-        if (count == 4)
+        if (matchCount == 4)
             return Optional.of(Prize.FOUR);
-        if (count == 5)
-            return Optional.ofNullable(findBonusNumber(lotto, bonusNumber));
-        if (count == 6)
+        if (matchCount == 5)
+            return Optional.ofNullable(checkBonusNumber(lotto, bonusNumber));
+        if (matchCount == 6)
             return Optional.of(Prize.SIX);
         return Optional.empty();
     }
 
-    public Prize findBonusNumber(Lotto lotto, BonusNumber bonusNumber) {
+    public Prize checkBonusNumber(Lotto lotto, BonusNumber bonusNumber) {
         if (lotto.getNumbers().contains(bonusNumber.getBonusNumber())) {
             return Prize.FIVE_BONUS;
         }

@@ -1,7 +1,11 @@
-package lotto;
+package lotto.controller;
 
-import lotto.domain.*;
-import lotto.domain.Number;
+import lotto.domain.computer.Computer;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.number.BonusNumber;
+import lotto.domain.number.Number;
+import lotto.domain.number.WinningNumbers;
+import lotto.domain.prize.Prizes;
 import lotto.service.LottoService;
 import lotto.ui.UserInterface;
 import lotto.util.Seperator;
@@ -23,7 +27,7 @@ public class LottoController {
         outputView.printBuyingResult(lottos);
         WinningNumbers winningNumbers = makeWinningNumbers();
         BonusNumber bonusNumber = makeBonusNumber(winningNumbers);
-        Prizes prizes = new Prizes(lottoService.calculatePrize(lottos, winningNumbers, bonusNumber));
+        Prizes prizes = new Prizes(lottoService.checkPrize(lottos, winningNumbers, bonusNumber));
         outputView.printPrizeResult(prizes, Computer.computeProfit(lottos, prizes.getTotalPrizeMoney()));
     }
 

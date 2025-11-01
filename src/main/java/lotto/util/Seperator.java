@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.Number;
+import lotto.domain.number.Number;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Seperator {
         try {
             numbers = Arrays.stream(inputString.split(SEPARATOR))
                     .map(Integer::parseInt)
-                    .map(lotto.domain.Number::new)
+                    .map(Number::new)
                     .toList();
         } catch (NumberFormatException e) {
             System.out.println(SEPERATE_NOT_NUMBER);
