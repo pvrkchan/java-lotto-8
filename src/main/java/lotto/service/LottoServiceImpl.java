@@ -1,12 +1,13 @@
 package lotto.service;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoStorage;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.money.Money;
 import lotto.domain.number.BonusNumber;
+import lotto.domain.number.WinningInformation;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.prize.Prize;
-import lotto.repository.LottoMemoryStorage;
 import lotto.repository.WinningInformationStorage;
 import lotto.util.RandomPicker;
 
@@ -14,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoServiceImpl implements LottoService {
-    private LottoMemoryStorage lottoMemoryStorage;
-    private WinningInformationStorage winningInformationStorage;
+    private LottoStorage lottoStorage;
+    private WinningInformation winningInformationStorage;
 
-    public LottoServiceImpl(LottoMemoryStorage storage, WinningInformationStorage WinningInformationStorage) {
-        this.lottoMemoryStorage = storage;
-        this.winningInformationStorage = new WinningInformationStorage();
+    public LottoServiceImpl(LottoStorage lottoStorage, WinningInformation WinningInformation) {
+        this.lottoStorage = lottoStorage;
+        this.winningInformationStorage = WinningInformation;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class LottoServiceImpl implements LottoService {
             balance = balance.pay();
         }
         Lottos lottos = new Lottos(listOfLotto);
-        lottoMemoryStorage.save(lottos);
+        lottoStorage.save(lottos);
         return lottos;
     }
 
@@ -43,8 +44,13 @@ public class LottoServiceImpl implements LottoService {
 
     @Override
     public List<Prize> getPrizes() {
-        Lottos lottos = lottoMemoryStorage.getLottos();
+        Lottos lottos = lottoStorage.getLottos();
         List<Prize> prizes = lottos.CheckAllLottosWinning(winningInformationStorage);
         return prizes;
+    }
+
+    @Override
+    public WinningInformation getWinningInformationStorage() {
+        return winningInformationStorage;
     }
 }

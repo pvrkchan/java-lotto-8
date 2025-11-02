@@ -2,7 +2,9 @@ package lotto.controller;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.number.WinningInformation;
 import lotto.domain.prize.Prize;
+import lotto.repository.WinningInformationStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -10,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +32,8 @@ class LottoControllerTest {
             outputView = new SpyOutputView();
             lottoService = new StubLottoService(
                     new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6)))),
-                    List.of(Prize.SIX));
+                    List.of(Prize.SIX)
+            );
             lottoController = new LottoController(userInterface,outputView,lottoService);
         }
 
@@ -80,7 +82,8 @@ class LottoControllerTest {
             outputView = new SpyOutputView();
             lottoService = new StubLottoService(
                     new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6)))),
-                    List.of(Prize.SIX));
+                    List.of(Prize.SIX)
+            );
             lottoController = new LottoController(userInterface, outputView, lottoService);
         }
 
@@ -117,6 +120,7 @@ class LottoControllerTest {
             assertThat(lottoService.getPrizesCalled).isTrue();
             assertThat(lottoService.getPrizes()).containsExactly(Prize.SIX);
         }
+
     }
 
     @Nested
@@ -137,6 +141,7 @@ class LottoControllerTest {
             //given
             Lottos lottos = new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6))));
             List<Prize> prizes = List.of(Prize.SIX);
+            WinningInformation winningInformation= new WinningInformationStorage();
             StubLottoService lottoService = new StubLottoService(lottos, prizes);
             LottoController lottoController = new LottoController(userInterface, outputView, lottoService);
 
@@ -153,6 +158,7 @@ class LottoControllerTest {
             //given
             Lottos lottos = new Lottos(List.of(new Lotto(List.of(1,2,3,8,9,10))));
             List<Prize> prizes = List.of(Prize.THREE);
+            WinningInformation winningInformation= new WinningInformationStorage();
             StubLottoService lottoService = new StubLottoService(lottos, prizes);
             LottoController lottoController = new LottoController(userInterface, outputView, lottoService);
 

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.lotto.Lottos;
 import lotto.domain.number.BonusNumber;
+import lotto.domain.number.WinningInformation;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.prize.Prize;
 import lotto.service.LottoService;
@@ -18,7 +19,7 @@ public class StubLottoService implements LottoService {
     BonusNumber receivedBonusNumber;
 
     boolean getPrizesCalled = false;
-    Lottos receivedLottos;
+
 
     private final Lottos lottos;
     private final List<Prize> prizes;
@@ -46,5 +47,10 @@ public class StubLottoService implements LottoService {
     public List<Prize> getPrizes() {
         getPrizesCalled = true;
         return prizes;
+    }
+
+    @Override
+    public WinningInformation getWinningInformationStorage() {
+        return null;
     }
 }
