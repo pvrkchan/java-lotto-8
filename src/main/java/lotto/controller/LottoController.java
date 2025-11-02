@@ -25,16 +25,19 @@ public class LottoController {
     public void run() {
         Lottos lottos = makeLottos();
         outputView.printBuyingResult(lottos);
+
         WinningNumbers winningNumbers = makeWinningNumbers();
         BonusNumber bonusNumber = makeBonusNumber(winningNumbers);
-        Prizes prizes = new Prizes(lottoService.checkPrize(lottos, winningNumbers, bonusNumber));
+        lottoService.registerWinningInformation(winningNumbers, bonusNumber);
+
+        Prizes prizes = new Prizes(lottoService.getPrizes());
         outputView.printPrizeResult(prizes, Computer.computeProfit(lottos, prizes.getTotalPrizeMoney()));
     }
 
     private Lottos makeLottos() {
         while (true) {
             try {
-                return new Lottos(lottoService.buyLotto(userInterface.readMoneyAmount()));
+                return lottoService.buyLotto(userInterface.readMoneyAmount());
             } catch (IllegalArgumentException e) {
             }
         }

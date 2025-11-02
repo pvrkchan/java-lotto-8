@@ -1,10 +1,17 @@
 package lotto.domain.lotto;
 
+import lotto.domain.number.BonusNumber;
+import lotto.domain.number.Number;
+import lotto.domain.number.WinningNumbers;
+import lotto.domain.prize.Prize;
+import lotto.repository.WinningInformationStorage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,8 +36,8 @@ class LottoTest {
     }
 
     @Nested
-    @DisplayName("기능 테스트")
-    class FunctionTest {
+    @DisplayName("출력 테스트")
+    class PrintTest {
         @DisplayName("로또를 출력하면 해당 로또 번호가 출력되어야 한다.")
         @Test
         void shouldReturnToStringTest() {
@@ -39,6 +46,44 @@ class LottoTest {
 
             //when, then
             assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        }
+    }
+
+    @Nested
+    @DisplayName("당첨 여부 확인 테스트")
+    class checkWinningTests {
+
+
+        List<Number> numbers = List.of(
+                new Number(1), new Number(2), new Number(3),
+                new Number(4), new Number(5), new Number(6)
+        );
+        WinningNumbers winningNumbers = new WinningNumbers(numbers);
+        BonusNumber bonusNumber = new BonusNumber(new Number(7), winningNumbers);
+        WinningInformationStorage winningInformationStorage = new WinningInformationStorage();
+        @BeforeEach
+        void setUp() {
+            winningInformationStorage.save(winningNumbers,bonusNumber);
+        }
+
+        @DisplayName("로또의 당첨 여부를 확인할 수 있다.")
+        @Test
+        void canCheckWinningOfLotto() {
+            //given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+            //when, then
+            assertThat(lotto.checkWinning(winningInformationStorage)).isEqualTo(Optional.of(Prize.SIX));
+        }
+
+        @DisplayName("로또의 보너스 당첨 여부를 확인할 수 있다.")
+        @Test
+        void canCheckBonusWinningOfLotto() {
+            //given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+
+            //when, then
+            assertThat(lotto.checkWinning(winningInformationStorage)).isEqualTo(Optional.of(Prize.FIVE_BONUS));
         }
     }
 }

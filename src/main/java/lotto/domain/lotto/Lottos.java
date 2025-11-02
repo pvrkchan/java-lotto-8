@@ -1,6 +1,11 @@
 package lotto.domain.lotto;
 
+import lotto.domain.number.WinningInformation;
+import lotto.domain.prize.Prize;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static lotto.error.ErrorMessage.LOTTOS_EMPTY;
 
@@ -25,5 +30,14 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public List<Prize> CheckAllLottosWinning(WinningInformation winningInformation) {
+        List<Prize> prizes = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Optional<Prize> optionalPrize = lotto.checkWinning(winningInformation);
+            optionalPrize.ifPresent(prizes::add);
+        }
+        return prizes;
     }
 }

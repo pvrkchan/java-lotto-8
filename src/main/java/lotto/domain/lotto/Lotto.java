@@ -1,7 +1,11 @@
 package lotto.domain.lotto;
 
+import lotto.domain.number.WinningInformation;
+import lotto.domain.prize.Prize;
+
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static lotto.error.ErrorMessage.LOTTO_NUMBER_DUPLICATE;
@@ -43,6 +47,28 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return List.copyOf(numbers);
+    }
+
+    public Optional<Prize> checkWinning(WinningInformation winningInformation) {
+        long matchCount = numbers.stream()
+                .filter(winningInformation.getWinningNumbers()::contains)
+                .count();
+        if (matchCount == 3)
+            return Optional.of(Prize.THREE);
+        if (matchCount == 4)
+            return Optional.of(Prize.FOUR);
+        if (matchCount == 5)
+            return Optional.ofNullable(checkBonusNumber(winningInformation.getBonusNumbers()));
+        if (matchCount == 6)
+            return Optional.of(Prize.SIX);
+        return Optional.empty();
+    }
+
+    public Prize checkBonusNumber(int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            return Prize.FIVE_BONUS;
+        }
+        return Prize.FIVE;
     }
 }

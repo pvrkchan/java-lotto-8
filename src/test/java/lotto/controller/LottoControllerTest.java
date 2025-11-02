@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.prize.Prize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +30,8 @@ class LottoControllerTest {
             userInterface = new StubUserInterface(1000, "1,2,3,4,5,6", 7);
             outputView = new SpyOutputView();
             lottoService = new StubLottoService(
-                    List.of(new Lotto(List.of(1,2,3,4,5,6))),
-                    List.of(Prize.SIX),
-                    Optional.empty(),
-                    null);
+                    new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6)))),
+                    List.of(Prize.SIX));
             lottoController = new LottoController(userInterface,outputView,lottoService);
         }
 
@@ -80,10 +79,8 @@ class LottoControllerTest {
             userInterface = new StubUserInterface(1000, "1,2,3,4,5,6", 7);
             outputView = new SpyOutputView();
             lottoService = new StubLottoService(
-                    List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))),
-                    List.of(Prize.SIX),
-                    Optional.empty(),
-                    null);
+                    new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6)))),
+                    List.of(Prize.SIX));
             lottoController = new LottoController(userInterface, outputView, lottoService);
         }
 
@@ -99,20 +96,26 @@ class LottoControllerTest {
         }
 
         @Test
-        @DisplayName("Controller는 LottoService.checkPrize를 호출한다.")
-        void shouldCallCheckPrize() {
+        @DisplayName("Controller는 LottoService.registerWinningInformation를 호출한다.")
+        void shouldCallRegisterWinningInformation() {
             //when
             lottoController.run();
 
             //then
-            assertThat(lottoService.checkPrizeCalled).isTrue();
-            assertThat(lottoService.receivedLottos.getLottos()).hasSize(1);
-            assertThat(lottoService.receivedLottos.getLottos().getFirst().getNumbers())
-                    .isEqualTo(List.of(1, 2, 3, 4, 5, 6));
-            assertThat(lottoService.receivedWinningNumbers.getWinningNumbers())
-                    .containsExactly(1, 2, 3, 4, 5, 6);
-            assertThat(lottoService.receivedBonusNumber.getBonusNumber())
-                    .isEqualTo(7);
+            assertThat(lottoService.registerWinningInformationCalled).isTrue();
+            assertThat(lottoService.receivedWinningNumbers.getWinningNumbers()).containsExactly(1,2,3,4,5,6);
+            assertThat(lottoService.receivedBonusNumber.getBonusNumber()).isEqualTo(7);
+        }
+
+        @Test
+        @DisplayName("Controller는 LottoService.getPrizes를 호출한다.")
+        void shouldCallGetPrizes() {
+            //when
+            lottoController.run();
+
+            //then
+            assertThat(lottoService.getPrizesCalled).isTrue();
+            assertThat(lottoService.getPrizes()).containsExactly(Prize.SIX);
         }
     }
 
@@ -132,27 +135,25 @@ class LottoControllerTest {
         @DisplayName("Controller는 LottoService로부터 받은 구매 복권 리스트를 OutputView로 전달한다.")
         void shouldPrintBuyingResult() {
             //given
-            List<Lotto> lottos = List.of(new Lotto(List.of(1,2,3,4,5,6)));
+            Lottos lottos = new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6))));
             List<Prize> prizes = List.of(Prize.SIX);
-            StubLottoService lottoService = new StubLottoService(
-                    lottos, prizes, Optional.empty(), null);
+            StubLottoService lottoService = new StubLottoService(lottos, prizes);
             LottoController lottoController = new LottoController(userInterface, outputView, lottoService);
 
             //when
             lottoController.run();
 
             //then
-            assertThat(outputView.lottos.getLottos()).isEqualTo(lottos);
+            assertThat(outputView.lottos).isEqualTo(lottos);
         }
 
         @Test
         @DisplayName("Controller는 LottoService로부터 받은 당첨 금액 리스트와 Computer에서 계산한 수익률을 OutputView로 전달한다.")
         void shouldPrintPrizeResult() {
             //given
-            List<Lotto> lottos = List.of(new Lotto(List.of(1,2,3,8,9,10)));
+            Lottos lottos = new Lottos(List.of(new Lotto(List.of(1,2,3,8,9,10))));
             List<Prize> prizes = List.of(Prize.THREE);
-            StubLottoService lottoService = new StubLottoService(
-                    lottos, prizes, Optional.empty(), null);
+            StubLottoService lottoService = new StubLottoService(lottos, prizes);
             LottoController lottoController = new LottoController(userInterface, outputView, lottoService);
 
             //when

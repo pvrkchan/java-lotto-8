@@ -9,7 +9,7 @@ import static lotto.error.ErrorMessage.*;
 public class WinningNumbers {
     private static final int MAXIMUM_COUNT = 6;
 
-    private List<Number> winningNumbers;
+    private final List<Number> winningNumbers;
 
     public WinningNumbers(List<Number> winningNumbers) {
         validate(winningNumbers);
@@ -45,8 +45,9 @@ public class WinningNumbers {
     }
 
     public List<Integer> getWinningNumbers() {
-        return winningNumbers.stream()
+        return List.copyOf(winningNumbers.stream()
                 .map(Number::getNumber)
-                .toList();
+                .toList()
+        );
     }
 }
