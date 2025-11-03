@@ -35,7 +35,7 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             System.out.println(LOTTO_NUMBER_SIZE.formatMessage(LOTTO_NUMBER_COUNT));
             throw new IllegalArgumentException(LOTTO_NUMBER_SIZE.formatMessage(LOTTO_NUMBER_COUNT));
         }

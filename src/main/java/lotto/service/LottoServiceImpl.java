@@ -8,7 +8,6 @@ import lotto.domain.number.BonusNumber;
 import lotto.domain.number.WinningInformation;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.prize.Prize;
-import lotto.repository.WinningInformationStorage;
 import lotto.util.RandomPicker;
 
 import java.util.ArrayList;
