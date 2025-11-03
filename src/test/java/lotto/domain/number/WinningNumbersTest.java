@@ -54,6 +54,6 @@ class WinningNumbersTest {
         numbers = List.of(number1, number2, number3, number4, number5, number6);
         WinningNumbers winningNumbers = new WinningNumbers(numbers);
 
-        assertThat(winningNumbers.getWinningNumbers()).containsExactly(1,2,3,4,5,6);
+        assertThat(winningNumbers.getWinningNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }

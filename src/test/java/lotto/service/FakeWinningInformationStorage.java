@@ -23,7 +23,7 @@ public class FakeWinningInformationStorage implements WinningInformation {
     }
 
     @Override
-    public int getBonusNumbers() {
+    public int getBonusNumber() {
         return bonusNumber.getBonusNumber();
     }
 }

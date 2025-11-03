@@ -26,9 +26,9 @@ class LottosTest {
 
     @BeforeEach
     void setUp() {
-        lotto1 = new Lotto(List.of(1,2,3,4,5,6));
-        lotto2 = new Lotto(List.of(1,2,3,4,5,7));
-        lotto3 = new Lotto(List.of(1,2,3,8,9,10));
+        lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        lotto3 = new Lotto(List.of(1, 2, 3, 8, 9, 10));
         lottos = new Lottos(List.of(lotto1, lotto2, lotto3));
     }
 

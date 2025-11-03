@@ -59,7 +59,7 @@ public class Lotto {
         if (matchCount == 4)
             return Optional.of(Prize.FOUR);
         if (matchCount == 5)
-            return Optional.ofNullable(checkBonusNumber(winningInformation.getBonusNumbers()));
+            return Optional.ofNullable(checkBonusNumber(winningInformation.getBonusNumber()));
         if (matchCount == 6)
             return Optional.of(Prize.SIX);
         return Optional.empty();

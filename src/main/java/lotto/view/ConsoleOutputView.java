@@ -4,6 +4,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.prize.Prize;
 import lotto.domain.prize.Prizes;
+
 import java.math.BigDecimal;
 
 public class ConsoleOutputView implements OutputView {

@@ -61,9 +61,10 @@ class LottoTest {
         WinningNumbers winningNumbers = new WinningNumbers(numbers);
         BonusNumber bonusNumber = new BonusNumber(new Number(7), winningNumbers);
         WinningInformationStorage winningInformationStorage = new WinningInformationStorage();
+
         @BeforeEach
         void setUp() {
-            winningInformationStorage.save(winningNumbers,bonusNumber);
+            winningInformationStorage.save(winningNumbers, bonusNumber);
         }
 
         @DisplayName("로또의 당첨 여부를 확인할 수 있다.")

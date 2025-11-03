@@ -5,13 +5,13 @@ import lotto.domain.number.Number;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.error.ErrorMessage.END_WITH_SEPERATOR;
-import static lotto.error.ErrorMessage.SEPERATE_NOT_NUMBER;
+import static lotto.error.ErrorMessage.*;
 
 public class Seperator {
     private static final String SEPARATOR = ",";
 
     public static List<Number> numberSplit(String inputString) {
+        validateNull(inputString);
         validateEndWithSeperator(inputString);
         List<Number> numbers;
         try {
@@ -20,10 +20,17 @@ public class Seperator {
                     .map(Number::new)
                     .toList();
         } catch (NumberFormatException e) {
-            System.out.println(SEPERATE_NOT_NUMBER);
+            System.out.println(SEPERATE_NOT_NUMBER.message());
             throw new IllegalArgumentException(SEPERATE_NOT_NUMBER.message());
         }
         return numbers;
+    }
+
+    private static void validateNull(String inputString) {
+        if (inputString == null) {
+            System.out.println(SEPERATE_NULL.message());
+            throw new IllegalArgumentException(SEPERATE_NULL.message());
+        }
     }
 
     private static void validateEndWithSeperator(String inputString) {

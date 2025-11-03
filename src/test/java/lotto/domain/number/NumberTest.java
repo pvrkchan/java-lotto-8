@@ -18,7 +18,7 @@ class NumberTest {
         void shouldThrowException_WhenOutOfRange() {
             assertThatThrownBy(() -> new Number(46))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(OUT_OF_NUMBER_RANGE.formatMessage(1,45));
+                    .hasMessage(OUT_OF_NUMBER_RANGE.formatMessage(1, 45));
         }
 
         @DisplayName("범위 이내의 수를 입력했을 때 객체를 생성할 수 있다.")

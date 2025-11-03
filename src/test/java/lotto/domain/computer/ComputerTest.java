@@ -16,7 +16,7 @@ class ComputerTest {
     @Test
     void shouldReturnProfitPercent() {
         // given
-        Lottos lottos = new Lottos(List.of(new Lotto(List.of(1,2,3,4,5,6))));
+        Lottos lottos = new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6))));
         BigDecimal totalPrizeMoney = new BigDecimal("5000");
 
         // when

@@ -7,5 +7,5 @@ public interface WinningInformation {
 
     List<Integer> getWinningNumbers();
 
-    int getBonusNumbers();
+    int getBonusNumber();
 }
