@@ -1,11 +1,11 @@
 package lotto.domain.money;
 
-import static lotto.error.ErrorMessage.MONEY_MINIMUM;
-import static lotto.error.ErrorMessage.MONEY_NOT_DIVIDED;
+import static lotto.error.ErrorMessage.*;
 
 public class Money {
     private static final int PRICE_PER_LOTTO = 1000;
     private static final int MINIMUM_BALANCE = 0;
+    private static final int MAXIMUM_BALANCE = 1_000_000;
 
     private int balance;
 
@@ -22,8 +22,16 @@ public class Money {
     }
 
     public static Money from(final int money) {
+        validateMaximum(money);
         validateNotDivided(money);
         return new Money(money);
+    }
+
+    private static void validateMaximum(int money) {
+        if (money > MAXIMUM_BALANCE) {
+            System.out.println(MONEY_MAXIMUM.formatMessage(MAXIMUM_BALANCE));
+            throw new IllegalArgumentException(MONEY_MAXIMUM.formatMessage(MAXIMUM_BALANCE));
+        }
     }
 
     private static void validateNotDivided(int money) {

@@ -23,6 +23,13 @@ class MoneyTest {
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
+        @DisplayName("1,000,000원을 넘는 구매 금액을 입력하는 경우 예외를 발생시킨다.")
+        @Test
+        void shouldThrowException_whenOverMaximum() {
+            assertThatThrownBy(() -> money.from(1_001_000))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
+
         @DisplayName("구매 금액으로 음수를 입력하는 경우 예외를 발생시킨다.")
         @Test
         void shouldThrowException_whenMoneyIsNegative() {

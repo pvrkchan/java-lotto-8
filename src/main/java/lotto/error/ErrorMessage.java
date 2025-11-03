@@ -7,6 +7,7 @@ public enum ErrorMessage {
     MONEY_AMOUNT_NOT_NUMBER("[ERROR] 금액으로는 숫자만 입력 가능합니다."),
     MONEY_NOT_DIVIDED("[ERROR] 로또 구입 금액은 %d원 단위로 입력해야 합니다."),
     MONEY_MINIMUM("[ERROR] 로또 구입 금액은 %d원 이상 입력해야 합니다."),
+    MONEY_MAXIMUM("[ERROR] 로또 구입 금액은 %d원까지만 가능합니다."),
     SEPERATE_NOT_NUMBER("[ERROR] 당첨번호 입력은 숫자만 가능합니다."),
     SEPERATE_NULL("[ERROR] 당첨번호 입력값이 null 입니다."),
     END_WITH_SEPERATOR("[ERROR] 구분자가 잘못 입력되었습니다."),
